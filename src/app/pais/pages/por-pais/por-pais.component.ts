@@ -10,14 +10,16 @@ import { PaisService } from '../../services/pais.service';
 })
 export class PorPaisComponent {
 
-  termino: string = "Alex";
-  countryWasFound: boolean = true;
+  public termino: string = "";
+  public countryWasFound:boolean = true;
+  
   countries: Country[] = [];
 
   
   constructor(private paisService:PaisService){}
-  submitMethod() {
-    console.log(this.termino);
+
+  submitMethod(event : string) {
+    this.termino=event;
     this.paisService.buscarPais(this.termino)
      .pipe()
      .subscribe(
@@ -34,11 +36,12 @@ export class PorPaisComponent {
      );
   }
 
-  alerta(val?:any){
-    if(!this.countryWasFound){
+  alerta(val : boolean) {
+    this.countryWasFound=val;
+    /*if(!this.countryWasFound){
       this.countryWasFound = true;
-    }
-    !this.countryWasFound ? this.countryWasFound = true : this.countryWasFound = this.countryWasFound 
+    }*/
+    //!this.countryWasFound ? this.countryWasFound = true : this.countryWasFound = this.countryWasFound 
   }
 
    

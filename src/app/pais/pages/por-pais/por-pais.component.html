@@ -2,16 +2,15 @@
 <hr>
 <div class="row">
     <div class="col">
-        <form  (ngSubmit)="submitMethod()" autocomplete="off">
-            <input [(ngModel)]="termino" type="text" name="terminox" class="form-control" placeholder="Buscar pais..." (input)="!countryWasFound ? countryWasFound=true : countryWasFound">
-        </form>
+        <app-pais-input (onEnter)="submitMethod($event)" 
+         (onInput)="alerta($event)" [countryWasFound_]="countryWasFound"></app-pais-input>
     </div>
 </div>
 <hr>
 <div class="alert alert-danger" *ngIf="!countryWasFound">
-    No se encontro nada con el pais con el nombre: {{termino}}
+    No se encontro nada con el pais con el nombre: {{termino}} {{countryWasFound.toString()}}
 </div>
-<div class="row" *ngIf="countries.length!=0">
+<div class="row" *ngIf="countries.length">
     <div class="col">
         <app-pais-tabla [countries_]="countries"></app-pais-tabla>
     </div>
