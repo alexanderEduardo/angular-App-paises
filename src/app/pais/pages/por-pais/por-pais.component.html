@@ -1,0 +1,18 @@
+<h2>Por Pais</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <form  (ngSubmit)="submitMethod()" autocomplete="off">
+            <input [(ngModel)]="termino" type="text" name="terminox" class="form-control" placeholder="Buscar pais..." (input)="!countryWasFound ? countryWasFound=true : countryWasFound">
+        </form>
+    </div>
+</div>
+<hr>
+<div class="alert alert-danger" *ngIf="!countryWasFound">
+    No se encontro nada con el pais con el nombre: {{termino}}
+</div>
+<div class="row" *ngIf="countries.length!=0">
+    <div class="col">
+        <app-pais-tabla [countries_]="countries"></app-pais-tabla>
+    </div>
+</div>
