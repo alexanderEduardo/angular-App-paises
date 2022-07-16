@@ -10,8 +10,8 @@ import { PaisService } from '../../services/pais.service';
 })
 export class PorPaisComponent {
 
-  public termino: string = "";
-  public countryWasFound:boolean = true;
+  termino: string = "";
+  countryWasFound:boolean = true;
   
   countries: Country[] = [];
 
@@ -36,15 +36,8 @@ export class PorPaisComponent {
      );
   }
 
-  alerta(val : boolean) {
-    this.countryWasFound=val;
-    /*if(!this.countryWasFound){
-      this.countryWasFound = true;
-    }*/
-    //!this.countryWasFound ? this.countryWasFound = true : this.countryWasFound = this.countryWasFound 
+  suggestions(event:any) {
+    this.countryWasFound=true;
   }
-
-   
-
 
 }

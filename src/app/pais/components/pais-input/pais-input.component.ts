@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-pais-input',
@@ -6,17 +7,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styles: [
   ]
 })
-export class PaisInputComponent {
+export class PaisInputComponent implements OnInit{
   
   /**
    * Cuando hago enter en el input emite el evento por ende (onEnter) es ejecutado en el template porPais
+   * debounceTime es como si 
    */
   @Output() 
   onEnter: EventEmitter<string> = new EventEmitter();
   
-  //@Input("termino_")
   termino : string = "Peru";
   
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+
+  deBouncer: Subject<string> = new Subject();
+
   @Output()
   onInput: EventEmitter<boolean> = new EventEmitter();
   
@@ -25,18 +30,25 @@ export class PaisInputComponent {
 
   
   constructor() { }
+  
+  ngOnInit(): void {
+    this.deBouncer
+    .pipe(debounceTime(300)) //delay for suscribe
+    .subscribe( inputValue => this.onDebounce.emit(inputValue));
+  }
 
   submitMethod() {
     this.onEnter.emit(this.termino);
     console.log(this.countryWasFound);
   }
   
-  alerta(val:any) {
-    if(!this.countryWasFound){
+  keyPress(event?:any) {
+    //console.log(val.target.value);
+    this.deBouncer.next(this.termino);
+    /*if(!this.countryWasFound){
       this.countryWasFound = true
       this.onInput.emit(this.countryWasFound);
-    }
-    //!this.countryWasFound ? this.countryWasFound=true : console.log("!·");
+    }*/
   }
   
 }

@@ -2,8 +2,10 @@
 <hr>
 <div class="row">
     <div class="col">
-        <app-pais-input (onEnter)="submitMethod($event)" 
-         (onInput)="alerta($event)" [countryWasFound_]="countryWasFound"></app-pais-input>
+        <app-pais-input (onEnter)="submitMethod($event)"  
+         [countryWasFound_]="countryWasFound"
+         (onDebounce)="suggestions($event)"
+         ></app-pais-input>
     </div>
 </div>
 <hr>
