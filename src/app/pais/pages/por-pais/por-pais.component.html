@@ -3,13 +3,17 @@
 <div class="row">
     <div class="col">
         <app-pais-input (onEnter)="submitMethod($event)"  
-         [countryWasFound_]="countryWasFound"
          (onDebounce)="suggestions($event)"
+         [inputDefaultValue] = termino
+         [placeHolder]="'Search for country...'"
          ></app-pais-input>
     </div>
 </div>
 <hr>
-<div class="alert alert-danger" *ngIf="!countryWasFound">
+<div *ngIf="isLoading">
+    <div class="alert alert-info">Cargando...</div>
+</div>
+<div class="alert alert-danger" *ngIf="!countryWasFound" (onEnter)="$event">
     No se encontro nada con el pais con el nombre: {{termino}} {{countryWasFound.toString()}}
 </div>
 <div class="row" *ngIf="countries.length">

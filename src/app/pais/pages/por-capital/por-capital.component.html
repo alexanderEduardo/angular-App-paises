@@ -1,0 +1,20 @@
+<h2>Por Capital</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-pais-input (onEnter)="submitMethod($event)"  
+         (onDebounce)="suggestions($event)"
+         [inputDefaultValue] = termino
+         placeHolder="'Search for capital...'"
+         ></app-pais-input>
+    </div>
+</div>
+<hr>
+<div class="alert alert-danger" *ngIf="!countryWasFound">
+    No se encontro nada con el pais con el nombre: {{termino}} {{countryWasFound.toString()}}
+</div>
+<div class="row" *ngIf="countries.length">
+    <div class="col">
+        <app-pais-tabla [countries_]="countries"></app-pais-tabla>
+    </div>
+</div>

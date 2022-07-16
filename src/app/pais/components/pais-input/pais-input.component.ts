@@ -11,24 +11,24 @@ export class PaisInputComponent implements OnInit{
   
   /**
    * Cuando hago enter en el input emite el evento por ende (onEnter) es ejecutado en el template porPais
-   * debounceTime es como si 
+   * debounceTime es como setTimeout
    */
+  
   @Output() 
   onEnter: EventEmitter<string> = new EventEmitter();
   
-  termino : string = "Peru";
-  
-  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
-
-  deBouncer: Subject<string> = new Subject();
-
   @Output()
   onInput: EventEmitter<boolean> = new EventEmitter();
   
-  @Input("countryWasFound_")
-  countryWasFound : boolean = true;
-
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
   
+  deBouncer: Subject<string> = new Subject();
+  
+  @Input("inputDefaultValue")
+  termino : string = "";
+  
+  @Input()
+  placeHolder : string = "";
   constructor() { }
   
   ngOnInit(): void {
@@ -39,16 +39,11 @@ export class PaisInputComponent implements OnInit{
 
   submitMethod() {
     this.onEnter.emit(this.termino);
-    console.log(this.countryWasFound);
   }
   
   keyPress(event?:any) {
     //console.log(val.target.value);
     this.deBouncer.next(this.termino);
-    /*if(!this.countryWasFound){
-      this.countryWasFound = true
-      this.onInput.emit(this.countryWasFound);
-    }*/
   }
   
 }
