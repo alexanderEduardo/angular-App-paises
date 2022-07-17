@@ -14,6 +14,7 @@ export class VerPaisComponent implements OnInit {
   countrieS : Country[] = [];
   wasd : any ;
   isLoading: boolean = true;
+  errorSearch: boolean = false;
 
   constructor(private activateRoute:ActivatedRoute, private paisService:PaisService) { }
 
@@ -22,11 +23,18 @@ export class VerPaisComponent implements OnInit {
     this.activateRoute.params
       .pipe(switchMap( param => this.paisService.buscarPorCode( param['codeCountry']))
       ,tap( console.log))
-      .subscribe( res => {
-        this.isLoading = false;
-        this.countrieS = res;
-        console.log(this.countrieS[0].translations['jpn'].common)
-        //this.countrieS.push(res[0],res[0],res[0]);
+      .subscribe({
+        next:res => {
+          this.isLoading = false;
+          this.countrieS = res;
+          console.log(this.countrieS[0].translations['jpn'].common)
+          //this.countrieS.push(res[0],res[0],res[0]);
+        },
+        error: err => {
+          this.isLoading = false;
+          this.errorSearch = true;
+          console.log(err)
+        }
       })
     
       /* this.activateRoute.params.subscribe( res => {

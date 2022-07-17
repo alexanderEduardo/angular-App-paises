@@ -10,8 +10,8 @@
     </div>
 </div>
 <hr>
-<div *ngIf="isLoading">
-    <div class="alert alert-info">Cargando...</div>
+<div *ngIf="isLoading" >
+    <app-spinner></app-spinner>
 </div>
 <div class="alert alert-danger" *ngIf="!countryWasFound" (onEnter)="$event">
     No se encontro nada con el pais con el nombre: {{termino}} {{countryWasFound.toString()}}

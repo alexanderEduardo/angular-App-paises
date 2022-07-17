@@ -1,36 +1,10 @@
 
 
-<div *ngIf=" isLoading ;else mainCountry" >
-    <h5 class="alert alert-info">Waiting please ...</h5>
-    <div class="loader loader--style6" title="5">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-           width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-          <rect x="0" y="13" width="4" height="5" fill="#333">
-            <animate attributeName="height" attributeType="XML"
-              values="5;21;5" 
-              begin="0s" dur="0.6s" repeatCount="indefinite" />
-            <animate attributeName="y" attributeType="XML"
-              values="13; 5; 13"
-              begin="0s" dur="0.6s" repeatCount="indefinite" />
-          </rect>
-          <rect x="10" y="13" width="4" height="5" fill="#333">
-            <animate attributeName="height" attributeType="XML"
-              values="5;21;5" 
-              begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-            <animate attributeName="y" attributeType="XML"
-              values="13; 5; 13"
-              begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-          </rect>
-          <rect x="20" y="13" width="4" height="5" fill="#333">
-            <animate attributeName="height" attributeType="XML"
-              values="5;21;5" 
-              begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-            <animate attributeName="y" attributeType="XML"
-              values="13; 5; 13"
-              begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-          </rect>
-        </svg>
-    </div>
+<div *ngIf=" isLoading ;else mainCountry"   >
+    <app-spinner></app-spinner>
+</div>
+<div class="alert alert-danger" *ngIf="errorSearch">
+    <h5>Error al intentar buscar 🙁 compruebe que el codigo de Pais sea el correcto</h5>
 </div>
 <ng-template #mainCountry>
     <div class="row" *ngFor="let country of countrieS;let i=index">
@@ -63,8 +37,9 @@
             </div>            
         </div>
     </div>
-    <h3>Traducciones</h3>
+    
     <div class="row" *ngFor="let country of countrieS;let i=index">
+        <h3>Traducciones</h3>
         <div class="col-12" >
             <span  *ngFor="let cc of country.translations | keyvalue" 
             class="badge bg-dark mr-5 mb-3 lett" [innerText]="cc.value.common"></span>
