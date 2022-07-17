@@ -4,13 +4,21 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-por-region',
   templateUrl: './por-region.component.html',
   styles: [
+    `button {
+      margin-right: 5px;
+    }`
   ]
 })
-export class PorRegionComponent implements OnInit {
+export class PorRegionComponent {
+
+  regions : string[] = ['africa', 'americas', 'asia', 'europe', 'oceania'];
+  activeRegion : string = '';
 
   constructor() { }
 
-  ngOnInit(): void {
+  activeButton(region : string) {
+    this.activeRegion = region;
   }
+
 
 }

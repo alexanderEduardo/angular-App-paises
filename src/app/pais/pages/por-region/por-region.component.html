@@ -1,1 +1,18 @@
-<p>por-region works!</p>
+<h3>Search for region <small>{{activeRegion | titlecase}}</small></h3>
+<hr>
+
+<h5>Select region</h5>
+<!-- [class.btn-dark]="reg === activeRegion" -->
+<!-- [ngClass]="{ 'btn-dark' : reg === activeRegion, 'btn-outline-dark' : reg !== activeRegion}" -->
+<!-- [class.active]="reg === activeRegion" -->
+<!-- [class]="reg === activeRegion ? 'btn-dark' : 'btn-outline-dark'" -->
+<div class="row">
+    <div class="col">
+        <button *ngFor="let reg of regions" class="btn btn-outline-dark"
+        (click)="activeButton(reg)" 
+        [class.active]="reg === activeRegion"
+        >
+            {{reg | titlecase}} 
+        </button>
+    </div>
+</div>
