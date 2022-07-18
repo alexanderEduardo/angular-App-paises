@@ -8,11 +8,25 @@
 <!-- [class]="reg === activeRegion ? 'btn-dark' : 'btn-outline-dark'" -->
 <div class="row">
     <div class="col">
-        <button *ngFor="let reg of regions" class="btn btn-outline-dark"
+        <button *ngFor="let reg of regionNames" class="btn btn-outline-dark"
         (click)="activeButton(reg)" 
         [class.active]="reg === activeRegion"
         >
             {{reg | titlecase}} 
         </button>
     </div>
+</div>  
+
+<div class="row" *ngIf="countries.length;else loading">
+    <div class="col">
+        <app-pais-tabla [countries_]="countries" 
+        [activeRegion_]="activeRegion"
+        [regions__]="regionNames"></app-pais-tabla>
+    </div>
+</div>
+<ng-template #loading>
+    <app-spinner *ngIf="isLoading"></app-spinner>
+</ng-template>
+<div class="alert alert-danger" *ngIf="errorRequest">
+    There was an error with the search for regions.
 </div>

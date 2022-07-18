@@ -1,4 +1,6 @@
-<table class="table table-hover">
+
+<table class="table table-hover  mt-5"
+ [class]="regionNames_.length>0 ? regions_classNames.get(activeRegion) : ''">
     <thead>
         <tr>
             <th>#</th>
@@ -10,13 +12,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let country of countries;let i =index">
+        <tr *ngFor="let country of countries;let i =index"  [class]="setClassPeru(country.name.common)">
             <td>{{i+1}}</td>
             <td>
                 <img [src]="country.flags.svg" alt="" class="small-flag">
             </td>
             <td [innerText]="country.name.common"></td>
-            <td>{{country?.capital?.toString() || "~isEmpty~" }}</td>
+            <td>{{country?.capital?.toString() || "~isEmpty~" | titlecase }}</td>
             <td [innerText]="country.population | number"></td>
             <td>
                 <a [routerLink]="['/pais',country.cca2]">Ver {{country.flag}}</a>

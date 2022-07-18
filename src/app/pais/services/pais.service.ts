@@ -24,7 +24,12 @@ export class PaisService {
   }
 
   buscarPorCode(code:string) : Observable<Country[]>{
-    return this.http.get<Country[]>(`${this.api_Key}/alpha/${code}`).pipe(catchError( err => Promise.reject(err) ));
+    return this.http.get<Country[]>(`${this.api_Key}/alpha/${code}`)
+      .pipe(catchError( err => Promise.reject(err)));
   }
 
+  buscarPorRegion(region:string) : Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.api_Key}/region/${region}`)
+      .pipe(catchError( err => Promise.reject(err)));
+  }
 }
