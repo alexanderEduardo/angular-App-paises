@@ -5,7 +5,11 @@ import { PaisService } from '../../services/pais.service';
 @Component({
   selector: 'app-por-pais',
   templateUrl: './por-pais.component.html',
-  styles: [
+  styles: [`
+    li {
+      cursor: pointer;
+    }
+  `
   ]
 })
 export class PorPaisComponent {
@@ -39,8 +43,19 @@ export class PorPaisComponent {
      );
   }
 
-  suggestions(event:any) {
+  suggestionsCountries: Country[] = [];
+  suggestions(event:string) {
     this.countryWasFound=true;
+    this.termino = event;
+    
+    console.log(event)
+    this.paisService.buscarPais(event)
+    .pipe().subscribe({
+      next : (res) => {
+        return this.suggestionsCountries = res.splice(0,3);
+      } ,
+      error: (err) => this.suggestionsCountries = []
+    })
   }
 
 }

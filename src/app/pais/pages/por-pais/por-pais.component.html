@@ -9,13 +9,29 @@
          ></app-pais-input>
     </div>
 </div>
+
+<ul class="list-group"  >
+    <li class="list-group-item list-group-item-action" *ngFor="let coun of suggestionsCountries">
+        <a class="nav-link" [routerLink]="['pais/',coun.cca2]">
+            {{coun.name.common}}
+        </a>
+    </li>
+    <li *ngIf="!countries.length" class="list-group-item list-group-item-action" (click)="submitMethod(termino)">
+        <a class="nav-link">
+           Buscar paises con " {{termino}} " 
+        </a>
+    </li>
+</ul>
 <hr>
+
 <div *ngIf="isLoading" >
     <app-spinner></app-spinner>
 </div>
+
 <div class="alert alert-danger" *ngIf="!countryWasFound" (onEnter)="$event">
-    No se encontro nada con el pais con el nombre: {{termino}} {{countryWasFound.toString()}}
+    No se encontro nada con el pais con el nombre: {{termino}} ~ {{countryWasFound.toString()}}
 </div>
+
 <div class="row" *ngIf="countries.length">
     <div class="col">
         <app-pais-tabla [countries_]="countries"></app-pais-tabla>
