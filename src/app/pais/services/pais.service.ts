@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Country } from '../interfaces/pais.interface';
@@ -14,8 +14,10 @@ export class PaisService {
 
 
   buscarPais(term:string) :Observable<Country[]> {
-   return this.http.get<Country[]>(`${this.api_Key}/name/${term}`).pipe(
-     catchError( err => Promise.reject(err)));
+    let params = new HttpParams()
+      .set("fields","name,capital,currencies,population,flags,flag,cca2");
+    return this.http.get<Country[]>(`${this.api_Key}/name/${term}`,{params}).pipe(
+      catchError( err => Promise.reject(err)));
   }
 
   buscarCapital(term:string) :Observable<Country[]> {
